@@ -186,7 +186,7 @@ static void check_and_handle_window(HWND hwnd, struct ow_target_window* target_i
   if (threadId == 0) {
     return;
   }
-  // fix: PostMessage results in ERROR_ACCESS_DENIED on not responding ghost window
+  // ignore fake ghost windows
   if (IsHungAppWindow(target_info->hwnd)) {
     return;
   }
@@ -199,29 +199,6 @@ static void check_and_handle_window(HWND hwnd, struct ow_target_window* target_i
     EVENT_OBJECT_DESTROY, EVENT_OBJECT_DESTROY,
     NULL, hook_proc, 0, threadId,
     WINEVENT_OUTOFCONTEXT);
-
-  // https://github.com/electron/electron/blob/8de06f0c571bc24e4230063e3ef0428390df773e/shell/browser/native_window_views.cc#L1065
-  SetLastError(0);
-  SetWindowLongPtrW(overlay_info.hwnd, GWLP_HWNDPARENT, (LONG_PTR)target_info->hwnd);
-
-  // undo implicit message queue attachment
-  AttachThreadInput(threadId, GetWindowThreadProcessId(overlay_info.hwnd, NULL), FALSE);
-
-  // fix: window is placed behind target
-  SetWindowPos(overlay_info.hwnd, target_info->hwnd, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-  SetWindowPos(target_info->hwnd, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
-
-  // fix: lost transparency on very first appearance
-  {
-    LONG style = GetWindowLong(overlay_info.hwnd, GWL_STYLE);
-    SetWindowLong(overlay_info.hwnd, GWL_STYLE, style | WS_VISIBLE);
-
-    LONG ex_style = GetWindowLong(overlay_info.hwnd, GWL_EXSTYLE);
-    SetWindowLong(overlay_info.hwnd, GWL_EXSTYLE, ex_style & ~WS_EX_LAYERED);
-    SetWindowLong(overlay_info.hwnd, GWL_EXSTYLE, ex_style);
-
-    SetWindowLong(overlay_info.hwnd, GWL_STYLE, style);
-  }
 
   struct ow_event e = {
     .type = OW_ATTACH,
@@ -337,8 +314,8 @@ static void hook_thread(void* _arg) {
   SetWinEventHook(
     EVENT_SYSTEM_MINIMIZEEND, EVENT_SYSTEM_MINIMIZEEND,
     NULL, hook_proc, 0, 0, WINEVENT_OUTOFCONTEXT);
-  // fix: ForegroundLockTimeout (even when = 0); Also edge cases when apps stealing FG window.
-  //      Using timer because WH_SHELL & WH_CBT hooks require dll injection
+  // FIXES: ForegroundLockTimeout (even when = 0); Also edge cases when apps stealing FG window.
+  // NOTE:  Using timer because WH_SHELL & WH_CBT hooks require dll injection
   SetTimer(NULL, 0, OW_FOREGROUND_TIMER_MS, foreground_timer_proc);
 
   foreground_window = GetForegroundWindow();
