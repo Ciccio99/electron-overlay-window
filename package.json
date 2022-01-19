@@ -1,12 +1,10 @@
 {
-  "name": "electron-overlay-window",
+  "name": "@ciccio99/electron-overlay-window",
   "version": "3.0.0-mac.1",
-  "author": {
-    "name": "Alexander Drozdov"
-  },
+  "author": "Alexander Drozdov",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ciccio99/electron-overlay-window.git"
+    "url": "git+https://github.com/Ciccio99/electron-overlay-window.git"
   },
   "license": "MIT",
   "keywords": [
@@ -50,5 +48,10 @@
   },
   "peerDependencies": {
     "electron": ">= 14"
-  }
+  },
+  "description": "[![](https://img.shields.io/npm/v/electron-overlay-window/latest?color=CC3534&label=electron-overlay-window&logo=npm&labelColor=212121)](https://www.npmjs.com/package/electron-overlay-window)",
+  "bugs": {
+    "url": "https://github.com/Ciccio99/electron-overlay-window/issues"
+  },
+  "homepage": "https://github.com/Ciccio99/electron-overlay-window#readme"
 }
