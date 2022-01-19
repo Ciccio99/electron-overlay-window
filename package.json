@@ -1,5 +1,5 @@
 {
-  "name": "@ciccio99/electron-overlay-window",
+  "name": "electron-overlay-window",
   "version": "3.0.0-mac.1",
   "author": "Alexander Drozdov",
   "repository": {
