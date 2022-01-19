@@ -35,3 +35,19 @@ jobs:
       with:
         name: linux
         path: prebuilds
+
+  mac:
+    runs-on: macos-10.15
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: yarn --frozen-lockfile
+      - run: yarn prebuild
+      - uses: actions/upload-artifact@v1
+        with:
+          name: windows
+          path: prebuilds
