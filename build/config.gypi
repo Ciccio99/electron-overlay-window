@@ -343,6 +343,7 @@
     "registry": "https://registry.yarnpkg.com",
     "version_commit_hooks": "true",
     "bin_links": "true",
+    "wrap_output": "",
     "strict_ssl": "true",
     "save_prefix": "^",
     "save_exact": "true",

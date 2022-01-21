@@ -327,7 +327,7 @@ endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
 cmd_regen_makefile = cd $(srcdir); /usr/local/Cellar/node/16.7.0/libexec/lib/node_modules/npm/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/var/folders/vr/kdkdp3x90k7d2x2yqydl3kt00000gn/T/prebuildify/node/16.0.0" "-Dnode_gyp_dir=/usr/local/Cellar/node/16.7.0/libexec/lib/node_modules/npm/node_modules/node-gyp" "-Dnode_lib_file=/var/folders/vr/kdkdp3x90k7d2x2yqydl3kt00000gn/T/prebuildify/node/16.0.0/<(target_arch)/node.lib" "-Dmodule_root_dir=/Users/alberto/Ronday/electron-overlay-window" "-Dnode_engine=v8" "--depth=." "-Goutput_dir=." "--generator-output=build" -I/Users/alberto/Ronday/electron-overlay-window/build/config.gypi -I/usr/local/Cellar/node/16.7.0/libexec/lib/node_modules/npm/node_modules/node-gyp/addon.gypi -I/var/folders/vr/kdkdp3x90k7d2x2yqydl3kt00000gn/T/prebuildify/node/16.0.0/include/node/common.gypi "--toplevel-dir=." binding.gyp
-Makefile: $(srcdir)/build/config.gypi $(srcdir)/../../../../private/var/folders/vr/kdkdp3x90k7d2x2yqydl3kt00000gn/T/prebuildify/node/16.0.0/include/node/common.gypi $(srcdir)/binding.gyp $(srcdir)/../../../../usr/local/Cellar/node/16.7.0/libexec/lib/node_modules/npm/node_modules/node-gyp/addon.gypi
+Makefile: $(srcdir)/../../../../usr/local/Cellar/node/16.7.0/libexec/lib/node_modules/npm/node_modules/node-gyp/addon.gypi $(srcdir)/binding.gyp $(srcdir)/build/config.gypi $(srcdir)/../../../../private/var/folders/vr/kdkdp3x90k7d2x2yqydl3kt00000gn/T/prebuildify/node/16.0.0/include/node/common.gypi
 	$(call do_cmd,regen_makefile)
 
 # "all" is a concatenation of the "all" targets from all the included
