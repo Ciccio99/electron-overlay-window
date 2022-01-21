@@ -37,7 +37,7 @@ class OverlayWindow extends events_1.EventEmitter {
     }
     static focusTarget() {
         __classPrivateFieldSet(OverlayWindow, _a, 'target', "f", _OverlayWindow_willBeFocused);
-        // OverlayWindow.#electronWindow.setIgnoreMouseEvents(true)
+        __classPrivateFieldGet(OverlayWindow, _a, "f", _OverlayWindow_electronWindow).setIgnoreMouseEvents(true);
         lib.focusTarget();
     }
     static attachTo(overlayWindow, targetWindowTitle, options = {}) {
@@ -167,7 +167,7 @@ OverlayWindow.WINDOW_OPTS = {
 (() => {
     OverlayWindow.events.on('attach', (e) => {
         __classPrivateFieldSet(OverlayWindow, _a, true, "f", _OverlayWindow_isFocused);
-        // OverlayWindow.#electronWindow.setIgnoreMouseEvents(true)
+        __classPrivateFieldGet(OverlayWindow, _a, "f", _OverlayWindow_electronWindow).setIgnoreMouseEvents(true);
         __classPrivateFieldGet(OverlayWindow, _a, "f", _OverlayWindow_electronWindow).showInactive();
         if (process.platform === 'linux') {
             __classPrivateFieldGet(OverlayWindow, _a, "f", _OverlayWindow_electronWindow).setSkipTaskbar(true);
@@ -200,7 +200,7 @@ OverlayWindow.WINDOW_OPTS = {
     OverlayWindow.events.on('focus', () => {
         __classPrivateFieldSet(OverlayWindow, _a, undefined, "f", _OverlayWindow_willBeFocused);
         __classPrivateFieldSet(OverlayWindow, _a, true, "f", _OverlayWindow_isFocused);
-        // OverlayWindow.#electronWindow.setIgnoreMouseEvents(true)
+        __classPrivateFieldGet(OverlayWindow, _a, "f", _OverlayWindow_electronWindow).setIgnoreMouseEvents(true);
         if (!__classPrivateFieldGet(OverlayWindow, _a, "f", _OverlayWindow_electronWindow).isVisible()) {
             __classPrivateFieldGet(OverlayWindow, _a, "f", _OverlayWindow_electronWindow).showInactive();
             if (process.platform === 'linux') {
